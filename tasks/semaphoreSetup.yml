@@ -1,0 +1,19 @@
+- expect:
+      command: semaphore setup
+      responses:
+        (.*) \(default 1\)(.*): '3'
+        (.*)db Hostname \(default 127.0.0.1:5432\)(.*): ''
+        (.*)db User \(default root\)(.*): "{{ db_User }}"
+        (.*)db Password(.*): "{{ db_Password }}"
+        (.*)db Name \(default semaphore\)(.*): "{{ db_Name }}"
+        (.*)Playbook path \(default \/tmp\/semaphore\)(.*): "{{ Playbook_path }}"
+        (.*)Web root URL \(optional, see https://github.com/ansible-semaphore/semaphore/wiki/Web-root-URL\)(.*): ''
+        (.*)Enable email alerts\? \(yes\/no\) \(default no\)(.*): ''
+        (.*)Enable telegram alerts\? \(yes\/no\) \(default no\)(.*): ''
+        (.*)Enable slack alerts\? \(yes\/no\) \(default no\)(.*): ''
+        (.*)Enable LDAP authentication\? \(yes\/no\) \(default no\)(.*): ''
+        (.*)Config output directory \(default \/home/levi\)(.*): ''
+        (.*)Username(.*): "{{ users.list[0].login }}"
+        (.*)Email(.*): "{{ users.list[0].email }}"
+        (.*)Your name(.*): "{{ users.list[0].name }}"
+        (.*)Password(.*): "{{ users.list[0].password }}"

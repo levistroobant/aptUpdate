@@ -1,0 +1,7 @@
+---
+- ansible.builtin.shell: semaphore user add --login {{ item.login }} --name={{ item.name }} --email={{ item.email }} --password={{ item.password }}
+  loop: "{{ users.list[1:] }}"
+  when: item.admin == "false"
+- ansible.builtin.shell: semaphore user add --admin --login {{ item.login }} --name={{ item.name }} --email={{ item.email }} --password={{ item.password }}
+  loop: "{{ users.list[1:] }}"
+  when: item.admin == "true"

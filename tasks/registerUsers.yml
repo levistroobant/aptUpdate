@@ -1,0 +1,6 @@
+---
+- name: Register the needed users from csv file
+  community.general.read_csv:
+    path: "{{ role_path }}/files/users.csv"
+  register: users
+  delegate_to: localhost

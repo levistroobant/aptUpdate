@@ -1,0 +1,42 @@
+---
+# tasks file for prereqs
+- name: installing dependencies
+  ansible.builtin.apt:
+    pkg:
+    - git
+    - curl
+    - wget
+    - software-properties-common
+    - ansible 
+    - postgresql
+    - nginx
+    - python3-psycopg2
+    - pip
+  become: true
+- name: Install pexpect with pip (for ansible expect module)
+  ansible.builtin.pip:
+    name: pexpect
+- name: add semaphore to services 
+  ansible.builtin.blockinfile:
+    path: /etc/systemd/system/semaphore.service
+    create: true
+    block: |
+      [Unit]
+      Description=Semaphore Ansible UI
+      Documentation=https://github.com/ansible-semaphore/semaphore
+      Wants=network-online.target
+      After=network-online.target
+
+      [Service]
+      Type=simple
+      ExecReload=/bin/kill -HUP $MAINPID
+      ExecStart=/usr/bin/semaphore server --config /etc/semaphore/config.json
+      SyslogIdentifier=semaphore
+      Restart=always
+
+      [Install]
+      WantedBy=multi-user.target
+  become: true
+  notify: 
+    - enable semaphore
+    - start semaphore

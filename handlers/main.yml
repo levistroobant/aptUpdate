@@ -1,0 +1,16 @@
+---
+# handlers file for prereqs
+- name: restart systemd
+  ansible.builtin.systemd:
+    daemon_reexec: true
+  become: true
+- name: start semaphore
+  ansible.builtin.service:
+    name: semaphore
+    state: restarted
+  become: true
+- name: enable semaphore
+  ansible.builtin.service:
+    name: semaphore
+    enabled: yes
+  become: true

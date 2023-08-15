@@ -1,0 +1,5 @@
+admin,login,name,email,password
+true,levi,levi,levi.stroobants@gmail.com,Test123
+false,jevi,levi,jevi.stroobants@gmail.com,Test123
+false,sefi,levi,sevi.stroobants@gmail.com,Test123
+false,devi,levi,devi.stroobants@gmail.com,Test123

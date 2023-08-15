@@ -1,0 +1,13 @@
+---
+- name: get latest semaphore version and save it for later
+  shell:
+    curl -s https://api.github.com/repos/ansible-semaphore/semaphore/releases/latest|grep tag_name | cut -d '"' -f 4|sed 's/v//g'
+  register: semaphoreVer
+- name: Download semaphore
+  ansible.builtin.get_url:
+    url: https://github.com/ansible-semaphore/semaphore/releases/download/v{{semaphoreVer.stdout}}/semaphore_{{semaphoreVer.stdout}}_linux_amd64.deb
+    dest: /home/levi/Downloads
+- name: install semaphore
+  ansible.builtin.apt:
+    deb: /home/levi/Downloads/semaphore_{{semaphoreVer.stdout}}_linux_amd64.deb
+  become: true

@@ -1,0 +1,7 @@
+---
+# defaults file for prereqs
+db_User: 'semaphore'
+db_Password: 'Test123'
+db_Name: 'semaphoredb'
+Playbook_path: '/opt/semaphore'
+include_BC: "true"

@@ -1,0 +1,21 @@
+---
+- name: Create db
+  community.postgresql.postgresql_db:
+    state: present
+    name: "{{ db_Name }}"
+  become: true
+  become_user: postgres
+- name: create database user
+  community.postgresql.postgresql_user:
+    name: "{{ db_User }}"
+    password: "{{ db_Password }}"
+  become: true
+  become_user: postgres
+- name: Set owner as semaphore for semaphoredb
+  community.postgresql.postgresql_owner:
+    db: "{{ db_Name }}"
+    new_owner: "{{ db_User }}"
+    obj_name: "{{ db_Name }}"
+    obj_type: database
+  become: true
+  become_user: postgres
