@@ -1,16 +1,4 @@
 ---
-- name: include prep 
-  include_tasks: prep.yml
-- name: include database setup 
-  include_tasks: postgres.yml
-- name: include download of semaphore
-  include_tasks: semaphoreInstall.yml
-- name: include registering of users via csv
-  include_tasks: registerUsers.yml
-- name: include semaphore setup
-  include_tasks: semaphoreSetup.yml
-- name: include creating of users
-  include_tasks: users.yml
-- name: include bash completion if deffault var include_BC is true (by default it is)
-  include_tasks: bashCompletion.yml
-  when: include_BC == "true"
+- name: Run the equivalent of "apt-get update" as a separate step
+  ansible.builtin.apt:
+    update_cache: yes
